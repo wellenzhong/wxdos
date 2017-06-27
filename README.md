@@ -32,78 +32,25 @@ app.js是小程序的脚本代码。我们可以在这个文件中监听并处�
 
 ```
 //app.js
-
 App({
-  onLaunch: 
-function
- (
-) 
-{
-    
-//调用API从本地缓存中获取数据
-var
- logs = wx.getStorageSync(
-'logs'
-) || []
-    logs.unshift(
-Date
-.now())
-    wx.setStorageSync(
-'logs'
-, logs)
+  onLaunch: function () {
+    //调用API从本地缓存中获取数据
+    var logs = wx.getStorageSync('logs') || []
+    logs.unshift(Date.now())
+    wx.setStorageSync('logs', logs)
   },
-  getUserInfo:
-function
-(
-cb
-)
-{
-    
-var
- that = 
-this
-;
-    
-if
-(
-this
-.globalData.userInfo){
-      
-typeof
- cb == 
-"function"
-&
-&
- cb(
-this
-.globalData.userInfo)
-    }
-else
-{
-      
-//调用登录接口
-
+  getUserInfo:function(cb){
+    var that = this;
+    if(this.globalData.userInfo){
+      typeof cb == "function" && cb(this.globalData.userInfo)
+    }else{
+      //调用登录接口
       wx.login({
-        success: 
-function
- (
-) 
-{
+        success: function () {
           wx.getUserInfo({
-            success: 
-function
- (
-res
-) 
-{
+            success: function (res) {
               that.globalData.userInfo = res.userInfo;
-              
-typeof
- cb == 
-"function"
-&
-&
- cb(that.globalData.userInfo)
+              typeof cb == "function" && cb(that.globalData.userInfo)
             }
           })
         }
@@ -111,91 +58,41 @@ typeof
     }
   },
   globalData:{
-    userInfo:
-null
-
+    userInfo:null
   }
 })
-
 ```
 
 app.json 是对整个小程序的全局配置。我们可以在这个文件中配置小程序是由哪些页面组成，配置小程序的窗口背景色，配置导航条样式，配置默认标题。注意该文件不可添加任何注释。更多可配置项可参考[配置详解](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html)
 
 ```
 {
-  
-"pages"
-:[
-    
-"pages/index/index"
-,
-    
-"pages/logs/logs"
-
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs"
   ],
-  
-"window"
-:{
-    
-"backgroundTextStyle"
-:
-"light"
-,
-    
-"navigationBarBackgroundColor"
-: 
-"#fff"
-,
-    
-"navigationBarTitleText"
-: 
-"WeChat"
-,
-    
-"navigationBarTextStyle"
-:
-"black"
-
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
   }
 }
-
 ```
 
 app.wxss 是整个小程序的公共样式表。我们可以在页面组件的 class 属性上直接使用 app.wxss 中声明的样式规则。
 
 ```
 /**app.wxss**/
-.container
- {
-  
-height
-: 
-100%
-;
-  
-display
-: flex;
-  
-flex-direction
-: column;
-  
-align-items
-: center;
-  
-justify-content
-: space-between;
-  
-padding
-: 
-200
-rpx 
-0
-;
-  
-box-sizing
-: border-box;
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
 }
-
 ```
 
 #### 创建页面 {#创建页面}
@@ -207,82 +104,17 @@ box-sizing
 index.wxml 是页面的结构文件：
 
 ```
-<
-!--index.wxml--
->
-<
-view
-class
-=
-"container"
->
-<
-view
-bindtap
-=
-"bindViewTap"
-class
-=
-"userinfo"
->
-<
-image
-class
-=
-"userinfo-avatar"
-src
-=
-"{{userInfo.avatarUrl}}"
-background-size
-=
-"cover"
->
-<
-/
-image
->
-<
-text
-class
-=
-"userinfo-nickname"
->
-{{userInfo.nickName}}
-<
-/
-text
->
-<
-/
-view
->
-<
-view
-class
-=
-"usermotto"
->
-<
-text
-class
-=
-"user-motto"
->
-{{motto}}
-<
-/
-text
->
-<
-/
-view
->
-<
-/
-view
->
+<!--index.wxml-->
+<view class="container">
+  <view  bindtap="bindViewTap" class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view>
 ```
-
 本例中使用了[`<view/>`](https://mp.weixin.qq.com/debug/wxadoc/dev/component/view.html)、[`<image/>`](https://mp.weixin.qq.com/debug/wxadoc/dev/component/image.html)、[`<text/>`](https://mp.weixin.qq.com/debug/wxadoc/dev/component/text.html)来搭建页面结构，绑定数据和交互处理函数。
 
 index.js 是页面的脚本文件，在这个文件中我们可以监听并处理页面的生命周期函数、获取小程序实例，声明并处理数据，响应页面交互事件等。
@@ -290,125 +122,56 @@ index.js 是页面的脚本文件，在这个文件中我们可以监听并处�
 ```
 //index.js
 //获取应用实例
-var
- app = getApp()
+var app = getApp()
 Page({
   data: {
-    motto: 
-'Hello World'
-,
+    motto: 'Hello World',
     userInfo: {}
   },
-  
-//事件处理函数
-
-  bindViewTap: 
-function
-(
-) 
-{
+  //事件处理函数
+  bindViewTap: function() {
     wx.navigateTo({
-      url: 
-'../logs/logs'
-
+      url: '../logs/logs'
     })
   },
-  onLoad: 
-function
- (
-) 
-{
-    
-console
-.log(
-'onLoad'
-)
-    
-var
- that = 
-this
-//调用应用实例的方法获取全局数据
-
-    app.getUserInfo(
-function
-(
-userInfo
-)
-{
-      
-//更新数据
-
+  onLoad: function () {
+    console.log('onLoad')
+    var that = this
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function(userInfo){
+      //更新数据
       that.setData({
         userInfo:userInfo
       })
     })
   }
 })
-
 ```
 
 index.wxss 是页面的样式表：
 
 ```
 /**index.wxss**/
-.userinfo
- {
-  
-display
-: flex;
-  
-flex-direction
-: column;
-  
-align-items
-: center;
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-
-.userinfo-avatar
- {
-  
-width
-: 
-128
-rpx;
-  
-height
-: 
-128
-rpx;
-  
-margin
-: 
-20
-rpx;
-  
-border-radius
-: 
-50%
-;
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
 }
 
-
-.userinfo-nickname
- {
-  
-color
-: 
-#aaa
-;
+.userinfo-nickname {
+  color: #aaa;
 }
 
-
-.usermotto
- {
-  
-margin-top
-: 
-200px
-;
+.usermotto {
+  margin-top: 200px;
 }
-
 ```
 
 页面的样式表是非必要的。当有页面样式表时，页面的样式表中的样式规则会层叠覆盖 app.wxss 中的样式规则。如果不指定页面的样式表，也可以在页面的结构文件中直接使用 app.wxss 中指定的样式规则。
@@ -420,86 +183,31 @@ index.json 是页面的配置文件：
 logs 的页面结构
 
 ```
-<
-!--logs.wxml--
->
-<
-view
-class
-=
-"container log-list"
->
-<
-block
-wx:for
-=
-"{{logs}}"
-wx:for-item
-=
-"log"
->
-<
-text
-class
-=
-"log-item"
->
-{{index + 1}}. {{log}}
-<
-/
-text
->
-<
-/
-block
->
-<
-/
-view
->
+<!--logs.wxml-->
+<view class="container log-list">
+  <block wx:for="{{logs}}" wx:for-item="log">
+    <text class="log-item">{{index + 1}}. {{log}}</text>
+  </block>
+</view>
 ```
 
 logs 页面使用[`<block/>`](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/list.html#block-wxfor)控制标签来组织代码，在`<block/>`上使用[`wx:for`](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/list.html#block-wxfor)绑定`logs`数据，并将`logs`数据循环展开节点
 
 ```
 //logs.js
-var
- util = 
-require
-(
-'../../utils/util.js'
-)
+var util = require('../../utils/util.js')
 Page({
   data: {
     logs: []
   },
-  onLoad: 
-function
- (
-) 
-{
-    
-this
-.setData({
-      logs: (wx.getStorageSync(
-'logs'
-) || []).map(
-function
- (
-log
-) 
-{
-        
-return
- util.formatTime(
-new
-Date
-(log))
+  onLoad: function () {
+    this.setData({
+      logs: (wx.getStorageSync('logs') || []).map(function (log) {
+        return util.formatTime(new Date(log))
       })
     })
   }
 })
-
 ```
 
 运行结果如下：
