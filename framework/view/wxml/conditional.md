@@ -5,57 +5,13 @@
 在框架中，我们用`wx:if="{{condition}}"`来判断是否需要渲染该代码块：
 
 ```
-<
-view
-wx:if
-=
-"{{condition}}"
->
- True 
-<
-/
-view
->
+这里应该有代码
 ```
 
 也可以用`wx:elif`和`wx:else`来添加一个 else 块：
 
 ```
-<
-view
-wx:if
-=
-"{{length 
->
- 5}}"
->
- 1 
-<
-/
-view
->
-<
-view
-wx:elif
-=
-"{{length 
->
- 2}}"
->
- 2 
-<
-/
-view
->
-<
-view
-wx:else
->
- 3 
-<
-/
-view
->
+这里应该有代码
 ```
 
 ### block wx:if {#block-wxif}
@@ -63,32 +19,7 @@ view
 因为`wx:if`是一个控制属性，需要将它添加到一个标签上。但是如果我们想一次性判断多个组件标签，我们可以使用一个`<block/>`标签将多个组件包装起来，并在上边使用`wx:if`控制属性。
 
 ```
-<
-block
-wx:if
-=
-"{{true}}"
->
-<
-view
->
- view1 
-<
-/
-view
->
-<
-view
->
- view2 
-<
-/
-view
->
-<
-/
-block
->
+这里应该有代码
 ```
 
 **注意：**`<block/>`并不是一个组件，它仅仅是一个包装元素，不会在页面中做任何渲染，只接受控制属性。

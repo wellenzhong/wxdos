@@ -7,19 +7,7 @@
 默认数组的当前项的下标变量名默认为`index`，数组当前项的变量名默认为`item`
 
 ```
-<
-view
-wx:for
-=
-"{{array}}"
->
-
-  {{index}}: {{item.message}}
-
-<
-/
-view
->
+这里应该有代码
 ```
 
 ```
@@ -44,71 +32,13 @@ Page({
 使用`wx:for-index`可以指定数组当前下标的变量名：
 
 ```
-<
-view
-wx:for
-=
-"{{array}}"
-wx:for-index
-=
-"idx"
-wx:for-item
-=
-"itemName"
->
-
-  {{idx}}: {{itemName.message}}
-
-<
-/
-view
->
+这里应该有代码
 ```
 
 `wx:for`也可以嵌套，下边是一个九九乘法表
 
 ```
-<
-view
-wx:for
-=
-"{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}"
-wx:for-item
-=
-"i"
->
-<
-view
-wx:for
-=
-"{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}"
-wx:for-item
-=
-"j"
->
-<
-view
-wx:if
-=
-"{{i 
-<
-= j}}"
->
-
-      {{i}} * {{j}} = {{i * j}}
-    
-<
-/
-view
->
-<
-/
-view
->
-<
-/
-view
->
+这里应该有代码
 ```
 
 ### block wx:for {#block-wxfor}
@@ -116,32 +46,7 @@ view
 类似`block wx:if`，也可以将`wx:for`用在`<block/>`标签上，以渲染一个包含多节点的结构块。例如：
 
 ```
-<
-block
-wx:for
-=
-"{{[1, 2, 3]}}"
->
-<
-view
->
- {{index}}: 
-<
-/
-view
->
-<
-view
->
- {{item}} 
-<
-/
-view
->
-<
-/
-block
->
+这里应该有代码
 ```
 
 ### wx:key {#wxkey}
@@ -162,229 +67,11 @@ block
 **示例代码：**
 
 ```
-<
-switch
-wx:for
-=
-"{{objectArray}}"
-wx:key
-=
-"unique"
-style
-=
-"display: block;"
->
- {{item.id}} 
-<
-/
-switch
->
-<
-button
-bindtap
-=
-"switch"
->
- Switch 
-<
-/
-button
->
-<
-button
-bindtap
-=
-"addToFront"
->
- Add to the front 
-<
-/
-button
->
-<
-switch
-wx:for
-=
-"{{numberArray}}"
-wx:key
-=
-"*this"
-style
-=
-"display: block;"
->
- {{item}} 
-<
-/
-switch
->
-<
-button
-bindtap
-=
-"addNumberToFront"
->
- Add to the front 
-<
-/
-button
->
+这里应该有代码
 ```
 
 ```
-Page({
-  data: {
-    objectArray: [
-      {id: 
-5
-, unique: 
-'unique_5'
-},
-      {id: 
-4
-, unique: 
-'unique_4'
-},
-      {id: 
-3
-, unique: 
-'unique_3'
-},
-      {id: 
-2
-, unique: 
-'unique_2'
-},
-      {id: 
-1
-, unique: 
-'unique_1'
-},
-      {id: 
-0
-, unique: 
-'unique_0'
-},
-    ],
-    numberArray: [
-1
-, 
-2
-, 
-3
-, 
-4
-]
-  },
-  
-switch
-: 
-function
-(
-e
-) 
-{
-    
-const
- length = 
-this
-.data.objectArray.length
-    
-for
- (
-let
- i = 
-0
-; i 
-<
- length; ++i) {
-      
-const
- x = 
-Math
-.floor(
-Math
-.random() * length)
-      
-const
- y = 
-Math
-.floor(
-Math
-.random() * length)
-      
-const
- temp = 
-this
-.data.objectArray[x]
-      
-this
-.data.objectArray[x] = 
-this
-.data.objectArray[y]
-      
-this
-.data.objectArray[y] = temp
-    }
-    
-this
-.setData({
-      objectArray: 
-this
-.data.objectArray
-    })
-  },
-  addToFront: 
-function
-(
-e
-) 
-{
-    
-const
- length = 
-this
-.data.objectArray.length
-    
-this
-.data.objectArray = [{id: length, unique: 
-'unique_'
- + length}].concat(
-this
-.data.objectArray)
-    
-this
-.setData({
-      objectArray: 
-this
-.data.objectArray
-    })
-  },
-  addNumberToFront: 
-function
-(
-e
-)
-{
-    
-this
-.data.numberArray = [ 
-this
-.data.numberArray.length + 
-1
- ].concat(
-this
-.data.numberArray)
-    
-this
-.setData({
-      numberArray: 
-this
-.data.numberArray
-    })
-  }
-})
-
+这里应该有代码
 ```
 
 **注意：**
@@ -392,73 +79,13 @@ this
 当`wx:for`的值为字符串时，会将字符串解析成字符串数组
 
 ```
-<
-view
-wx:for
-=
-"array"
->
-
-  {{item}}
-
-<
-/
-view
->
-```
-
-等同于
-
-```
-<
-view
-wx:for
-=
-"{{['a','r','r','a','y']}}"
->
-
-  {{item}}
-
-<
-/
-view
->
+这里应该有代码
 ```
 
 **注意：**花括号和引号之间如果有空格，将最终被解析成为字符串
 
 ```
-<
-view
-wx:for
-=
-"{{[1,2,3]}} "
->
-
-  {{item}}
-
-<
-/
-view
->
-```
-
-等同于
-
-```
-<
-view
-wx:for
-=
-"{{[1,2,3] + ' '}}"
->
-
-  {{item}}
-
-<
-/
-view
->
+这里应该有代码
 ```
 
 

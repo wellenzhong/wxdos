@@ -1,5 +1,14 @@
 { 
 	"title" : "小程序开发文档",
 	"description": "This is such a great book!",
-	"language" : "zh-hans"
+	"language" : "zh-hans",
+	"plugins": ["toggle-chapters","header","multipart"],
+	"pluginsConfig": {
+	       "layout": {
+	           "headerPath" : "layouts/header.html"
+	       }
+	   },
+	 "style":{
+	 	"gitbookdoc":"style/gitbookdoc.css"
+	 }
  }

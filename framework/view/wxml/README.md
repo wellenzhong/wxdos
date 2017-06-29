@@ -7,49 +7,14 @@ WXML（WeiXin Markup Language）是框架设计的一套标签语言，结合[�
 ### [数据绑定](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/data.html) {#数据绑定}
 
 ```
-<
-!--wxml--
->
-<
-view
->
- {{message}} 
-<
-/
-view
->
-```
-
-```
-// page.js
-
-Page({
-  data: {
-    message: 
-'Hello MINA!'
-
-  }
-})
+这里应该有代码
 
 ```
 
 ### [列表渲染](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/list.html) {#列表渲染}
 
 ```
-<
-!--wxml--
->
-<
-view
-wx:for
-=
-"{{array}}"
->
- {{item}} 
-<
-/
-view
->
+这里应该有代码
 ```
 
 ```
@@ -76,42 +41,7 @@ Page({
 ### [条件渲染](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/conditional.html) {#条件渲染}
 
 ```
-<
-!--wxml--
->
-<
-view
-wx:if
-=
-"{{view == 'WEBVIEW'}}"
->
- WEBVIEW 
-<
-/
-view
->
-<
-view
-wx:elif
-=
-"{{view == 'APP'}}"
->
- APP 
-<
-/
-view
->
-<
-view
-wx:else
-=
-"{{view == 'MINA'}}"
->
- MINA 
-<
-/
-view
->
+这里应该有代码
 ```
 
 ```
@@ -130,68 +60,7 @@ Page({
 ### [模板](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/template.html) {#模板}
 
 ```
-<
-!--wxml--
->
-<
-template
-name
-=
-"staffName"
->
-<
-view
->
-
-    FirstName: {{firstName}}, LastName: {{lastName}}
-  
-<
-/
-view
->
-<
-/
-template
->
-<
-template
-is
-=
-"staffName"
-data
-=
-"{{...staffA}}"
->
-<
-/
-template
->
-<
-template
-is
-=
-"staffName"
-data
-=
-"{{...staffB}}"
->
-<
-/
-template
->
-<
-template
-is
-=
-"staffName"
-data
-=
-"{{...staffC}}"
->
-<
-/
-template
->
+应该有一个模板的代码
 ```
 
 ```
@@ -222,17 +91,7 @@ Page({
 ### [事件](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/event.html) {#事件}
 
 ```
-<
-view
-bindtap
-=
-"add"
->
- {{count}} 
-<
-/
-view
->
+这里应该有代码
 ```
 
 ```
