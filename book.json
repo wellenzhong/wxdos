@@ -2,7 +2,7 @@
 	"title" : "小程序开发文档",
 	"description": "This is such a great book!",
 	"language" : "zh-hans",
-	"plugins": ["toggle-chapters","header","multipart"],
+	"plugins": ["toggle-chapters","header","multipart","-highlight"],
 	"pluginsConfig": {
 	       "layout": {
 	           "headerPath" : "layouts/header.html"
